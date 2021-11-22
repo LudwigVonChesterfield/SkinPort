@@ -168,6 +168,7 @@ public class Shared
 
     private static void preConnect(URLConnection conn)
     {
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
         conn.setConnectTimeout(10000);
         conn.setReadTimeout(30000);
         conn.setUseCaches(true);
@@ -204,6 +205,7 @@ public class Shared
     private static boolean stopIfHttpClientError(URLConnection conn)
     {
         if (conn instanceof HttpURLConnection)
+        {
             try
             {
                 if (((HttpURLConnection) conn).getResponseCode() / 100 == 4)
@@ -213,6 +215,7 @@ public class Shared
             {
                 Retries.rethrow(e);
             }
+        }
         return true;
     }
 
